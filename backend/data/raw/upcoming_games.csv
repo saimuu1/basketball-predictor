@@ -1,0 +1,7 @@
+game_id,game_date,team_a_id,team_b_id,team_a_name,team_b_name,home_team_id
+2001,2026-03-31,101,102,Duke,North Carolina,101
+2002,2026-03-31,103,105,Kansas,Gonzaga,103
+2003,2026-04-01,104,108,Kentucky,UConn,108
+2004,2026-04-01,106,107,UCLA,Villanova,106
+2005,2026-04-02,101,105,Duke,Gonzaga,
+2006,2026-04-02,103,104,Kansas,Kentucky,103

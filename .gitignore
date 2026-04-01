@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# ML model artifacts (large, regenerated at runtime)
+backend/ml/models/
+backend/ml/*.pkl
+backend/ml/*.joblib
+*.pkl
+*.joblib
+
+# SQLite database (ephemeral, rebuilt on first search)
+backend/data/games.db
+*.db
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/.vite/
+.npm
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
