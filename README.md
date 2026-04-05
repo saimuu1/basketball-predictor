@@ -25,21 +25,36 @@ A full-stack college basketball game predictor that uses **live ESPN and Barttor
 
 ## Running locally
 
+### Prerequisites
+
+- Python 3.10+
+- Node.js 18+
+
+### 1. Clone the repo
+
 ```bash
-# Backend
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+```
+
+### 2. Start the backend
+
+```bash
 pip install -r requirements.txt
 cd backend
 uvicorn app.main:app --reload
+```
 
-# Frontend (separate terminal)
+Backend runs at **http://localhost:8000**. You can explore the API at http://localhost:8000/docs.
+
+### 3. Start the frontend (new terminal)
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs at `http://localhost:5173`, backend at `http://localhost:8000`.
+Frontend runs at **http://localhost:5173** — open that in your browser.
 
-## Deployment
-
-- **Backend** — Railway (auto-deploys from `railway.toml` on every GitHub push)
-- **Frontend** — Vercel (root directory set to `frontend/`, auto-deploys on every GitHub push)
+No extra configuration needed. The frontend is pre-configured to talk to `http://localhost:8000` out of the box.

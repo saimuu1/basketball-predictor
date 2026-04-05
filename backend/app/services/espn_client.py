@@ -49,10 +49,21 @@ def _logo_url(team: dict) -> str | None:
 
 
 def _parse_events(events: list[dict]) -> list[dict]:
-    """Convert raw ESPN event dicts to our UpcomingGame-compatible dicts."""
+    """Convert raw ESPN event dicts to our UpcomingGame-compatible dicts.
+
+    Skips any event that ESPN marks as completed so finished games never
+    bleed into the upcoming list.
+    """
     games: list[dict] = []
     for event in events:
         try:
+            status_type = event.get("status", {}).get("type", {})
+            if status_type.get("completed", False):
+                continue
+            description = status_type.get("description", "")
+            if "final" in description.lower():
+                continue
+
             competition = event.get("competitions", [{}])[0]
             competitors = competition.get("competitors", [])
             if len(competitors) < 2:
@@ -89,7 +100,7 @@ def _parse_events(events: list[dict]) -> list[dict]:
                 "team_b_logo": _logo_url(team_b),
                 "home_team_id": home_team_id,
                 "venue": venue.get("fullName", ""),
-                "status": event.get("status", {}).get("type", {}).get("description", ""),
+                "status": description,
             })
         except Exception as exc:
             logger.debug("Could not parse ESPN event %s: %s", event.get("id"), exc)
@@ -144,7 +155,7 @@ def fetch_past_games(
     today = date.today()
     all_games: list[dict] = []
 
-    for delta in range(1, lookback + 1):
+    for delta in range(0, lookback + 1):
         check_date = today - timedelta(days=delta)
         for event in _fetch_day(check_date):
             game = _parse_completed_event(event)
